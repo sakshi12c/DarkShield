@@ -13,7 +13,7 @@ The fixed header uses a compact hero offset with only a small breathing space. T
 
 ## Key flows
 1. Choose an Indian store preset or enter a URL, check the page, and inspect the caution meter and matched signals.
-2. Review, filter, inspect, and delete persisted scan records in Audit Records.
+2. Review, filter, inspect, and delete the five newest scan records. Older scans remain stored in MongoDB; deleting a visible record pulls the next newest stored record into the list.
 3. Complete five Awareness Quiz scenarios, then review every question with the selected answer, correct answer for each mistake, and a plain-language explanation.
 4. Work through a five-step “Before you buy” checklist; progress remains private in the current browser session.
 

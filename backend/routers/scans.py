@@ -8,6 +8,7 @@ from lib.db import db
 from models.scans import PatternDetail, ScanCreate, ScanRecord, Severity
 
 router = APIRouter(prefix="/scans", tags=["scans"])
+LATEST_SCAN_LIMIT = 5
 
 PATTERNS: list[tuple[str, Severity, re.Pattern[str], str]] = [
     ("Fake Urgency", "High", re.compile(r"only\s+\d+\s+left|hurry\s+up|selling\s+fast|offer\s+ends\s+in\s+\d+\s*(?:min|mins|minutes|seconds)|deal\s+expires", re.I), "Look for a countdown or availability claim that stays unchanged after a refresh."),
@@ -90,7 +91,7 @@ async def create_scan(payload: ScanCreate):
 @router.get("", response_model=list[ScanRecord])
 async def list_scans(severity: Severity | None = Query(default=None)):
     query = {"severity": severity} if severity else {}
-    records = await db.scans.find(query).sort("created_at", -1).to_list(1000)
+    records = await db.scans.find(query).sort("created_at", -1).to_list(LATEST_SCAN_LIMIT)
     return [ScanRecord(**{**record, "created_at": normalize_datetime(record["created_at"])}) for record in records]
 
 
