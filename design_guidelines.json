@@ -1,0 +1,270 @@
+{
+  "project_name": "DarkShield",
+  "project_title": "DarkShield: Analysis of Dark Patterns in E-Commerce Websites",
+  "tagline": "See what the page isn't telling you.",
+  "theme": {
+    "mode": "dark-first with vibrant cyber-neon accents",
+    "background": "#0F172A",
+    "surface": "#1E293B",
+    "surface_glass": "rgba(30, 41, 59, 0.75)",
+    "primary": "#3B82F6",
+    "secondary": "#8B5CF6",
+    "accent_cyan": "#06B6D4",
+    "accent_emerald": "#22C55E",
+    "accent_amber": "#F59E0B",
+    "accent_rose": "#EF4444",
+    "border_subtle": "rgba(148, 163, 184, 0.15)",
+    "border_glow": "rgba(59, 130, 246, 0.35)",
+    "text_primary": "#F8FAFC",
+    "text_secondary": "#94A3B8"
+  },
+  "typography": {
+    "headline_font": "Space Grotesk Variable, Outfit, sans-serif",
+    "body_font": "DM Sans Variable, Geist Variable, sans-serif",
+    "mono_font": "JetBrains Mono Variable, IBM Plex Mono, monospace",
+    "hierarchy": {
+      "hero_title": "text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-white",
+      "hero_subtitle": "text-lg sm:text-xl text-slate-300 max-w-2xl leading-relaxed",
+      "section_h2": "text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight text-white",
+      "section_lead": "text-base sm:text-lg text-slate-400 max-w-xl",
+      "card_title": "text-lg sm:text-xl font-medium text-slate-100",
+      "code_token": "font-mono text-xs text-cyan-300 tracking-wide uppercase",
+      "metric_value": "text-3xl sm:text-4xl font-extrabold tracking-tight font-mono text-white"
+    }
+  },
+  "visual_enhancers": {
+    "glassmorphism": "backdrop-blur-xl bg-slate-900/75 border border-slate-700/50 shadow-2xl shadow-cyan-950/20",
+    "card_3d": "relative rounded-2xl bg-gradient-to-b from-slate-800/80 to-slate-900/90 border border-slate-700/60 p-6 sm:p-8 transition-transform duration-200 hover:-translate-y-1 hover:border-cyan-500/40 hover:shadow-[0_12px_40px_rgba(6,182,212,0.15)]",
+    "glow_beam": "absolute -inset-px rounded-2xl bg-gradient-to-r from-blue-500/20 via-cyan-500/30 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity blur-sm pointer-events-none",
+    "grid_pattern": "bg-[linear-gradient(to_right,#1e293b15_1px,transparent_1px),linear-gradient(to_bottom,#1e293b15_1px,transparent_1px)] bg-[size:24px_24px]",
+    "badge_risk_high": "bg-rose-500/15 text-rose-300 border border-rose-500/30 px-3 py-1 rounded-full text-xs font-mono font-medium",
+    "badge_risk_medium": "bg-amber-500/15 text-amber-300 border border-amber-500/30 px-3 py-1 rounded-full text-xs font-mono font-medium",
+    "badge_risk_low": "bg-emerald-500/15 text-emerald-300 border border-emerald-500/30 px-3 py-1 rounded-full text-xs font-mono font-medium"
+  },
+  "image_urls": [
+    {
+      "category": "hero_visual",
+      "image_url": "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwxfHxkaWdpdGFsJTIwdGVjaG5vbG9neSUyMHNlY3VyaXR5fGVufDB8fHx8MTc5MDY1ODQxOXww&ixlib=rb-4.1.0&q=85",
+      "description": "Teal cybersecurity LED digital matrix texture for hero backdrop and scan engine preview",
+      "component_placement": "Hero background subtle overlay & radar simulation card"
+    },
+    {
+      "category": "interactive_scanner",
+      "image_url": "https://images.unsplash.com/photo-1614064548237-096f735f344f?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA2ODl8MHwxfHNlYXJjaHwzfHxkaWdpdGFsJTIwdGVjaG5vbG9neSUyMHNlY3VyaXR5fGVufDB8fHx8MTc5MDY1ODQxOXww&ixlib=rb-4.1.0&q=85",
+      "description": "Padlock over laptop keyboard with vibrant dynamic neon light trails",
+      "component_placement": "Live detection engine showcase card and awareness banner"
+    },
+    {
+      "category": "e_commerce_context",
+      "image_url": "https://images.unsplash.com/photo-1563013544-824ae1b704d3?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwxfHxvbmxpbmUlMjBzaG9wcGluZyUyMHNlY3VyaXR5fGVufDB8fHx8MTc5MDY1ODQxOXww&ixlib=rb-4.1.0&q=85",
+      "description": "Online shopper holding payment card at laptop, target of checkout manipulation and deceptive patterns",
+      "component_placement": "Deceptive patterns breakdown section and consumer impact story"
+    },
+    {
+      "category": "scam_security_indicator",
+      "image_url": "https://images.unsplash.com/photo-1614064641938-3bbee52942c7?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwzfHxvbmxpbmUlMjBzaG9wcGluZyUyMHNlY3VyaXR5fGVufDB8fHx8MTc5MDY1ODQxOXww&ixlib=rb-4.1.0&q=85",
+      "description": "Glowing lock on black keycaps representing real-time detection barrier and trap prevention",
+      "component_placement": "Audit report export and risk analyzer widget"
+    }
+  ],
+  "information_architecture": {
+    "page_structure": [
+      {
+        "section_id": "navbar",
+        "title": "Tactical Navigation Bar",
+        "description": "Glassmorphism header fixed at top (z-50) with logo shield, preset fast-jump links (Live Scanner, Dark Pattern Radar, History Records, Awareness Quiz, Contact Audit), backend health ping status, and 'Scan Now' primary action button.",
+        "test_ids": ["nav-brand-logo", "nav-scanner-link", "nav-records-link", "nav-quiz-link", "nav-contact-link", "nav-scan-cta"]
+      },
+      {
+        "section_id": "hero_scanner",
+        "title": "Interactive Hero & Live Scanner Command Center",
+        "description": "Combines high-impact headline, live URL input with 1-click Indian preset websites (Amazon India, Flipkart, Myntra, Meesho), Screenshot OCR upload simulation, and instant Regex rule-based detection engine.",
+        "test_ids": ["hero-url-input", "preset-amazon-btn", "preset-flipkart-btn", "preset-myntra-btn", "preset-meesho-btn", "hero-scan-submit-btn", "tab-url-mode", "tab-screenshot-mode", "tab-rawtext-mode"]
+      },
+      {
+        "section_id": "results_dashboard",
+        "title": "Real-Time Scan Results & Risk Meter",
+        "description": "Displays live score gauge (Low/Medium/High risk), risk percentage (0-100%), circular severity progress, category breakdown (Fake Urgency, Scarcity, Hidden Costs, Confirm Shaming, Forced Action, Misleading Discounts), matched regex snippets, and PDF export trigger.",
+        "test_ids": ["results-risk-meter", "results-severity-badge", "results-patterns-count", "results-export-pdf-btn", "results-pattern-item"]
+      },
+      {
+        "section_id": "records_management",
+        "title": "Audit Records Management (CRUD Flow)",
+        "description": "Connects to FastAPI + MongoDB (/api/scans) allowing users to view recent audit records, search/filter by severity (High/Med/Low), inspect forensic details, and delete obsolete scans.",
+        "test_ids": ["records-table", "records-filter-severity", "records-search-input", "records-delete-btn", "records-inspect-btn"]
+      },
+      {
+        "section_id": "quiz_section",
+        "title": "Interactive Consumer Awareness Quiz",
+        "description": "Multi-question interactive challenge based on MCA project requirements. Immediate feedback, score calculation, awareness tier (Beginner, Moderate, Expert), and certificate badge generation.",
+        "test_ids": ["quiz-card", "quiz-option-btn", "quiz-next-btn", "quiz-score-badge", "quiz-restart-btn"]
+      },
+      {
+        "section_id": "contact_section",
+        "title": "Interactive Incident Report & Contact Form",
+        "description": "Full-fledged interactive contact/report form connected to FastAPI backend (/api/contacts). Users report deceptive e-commerce URLs, submit screenshots, describe checkout traps, and receive immediate tracking confirmation.",
+        "test_ids": ["contact-form", "contact-name-input", "contact-email-input", "contact-url-input", "contact-pattern-type-select", "contact-message-input", "contact-submit-btn", "contact-success-alert"]
+      },
+      {
+        "section_id": "footer",
+        "title": "Futuristic Cybersecurity Footer",
+        "description": "Subtle dark slate footer with legal disclosures, MCA Project academic credits, Indian e-commerce consumer guidelines citation, and system status indicator.",
+        "test_ids": ["footer-credits", "footer-status-pill"]
+      }
+    ]
+  },
+  "component_specifications": {
+    "navbar": {
+      "desktop_layout": "flex items-center justify-between px-6 lg:px-12 py-3 bg-slate-900/80 backdrop-blur-xl border-b border-slate-800/80 sticky top-0 z-50",
+      "mobile_layout": "collapsible sheet menu with full keyboard navigation and touch-friendly touch targets min 44px",
+      "elements": [
+        "Shield SVG Icon with animated cyan pulse",
+        "Brand wordmark 'DarkShield' with 'MCA AI/Regex Engine' sub-badge",
+        "Anchor links with smooth scroll to #scanner, #results, #records, #quiz, #contact",
+        "Live backend status ping (Green dot = MongoDB Connected)",
+        "Gradient CTA button 'Analyze Store'"
+      ]
+    },
+    "scanner_card": {
+      "container": "relative p-6 sm:p-8 rounded-3xl bg-slate-900/90 border border-slate-800 shadow-2xl backdrop-blur-2xl overflow-hidden",
+      "modes": ["URL Analysis", "Screenshot OCR", "Raw HTML/Text Paste"],
+      "regex_engine_categories": [
+        {
+          "id": "fake_urgency",
+          "label": "Fake Urgency",
+          "regex": "(only\\s+\\d+\\s+left|hurry\\s+up|selling\\s+fast|offer\\s+ends\\s+in\\s+\\d+\\s*(?:min|mins|minutes|seconds)|deal\\s+expires)",
+          "severity": "High"
+        },
+        {
+          "id": "scarcity",
+          "label": "Artificial Scarcity",
+          "regex": "(few\\s+items\\s+remaining|last\\s+chance|almost\\s+sold\\s+out|limited\\s+stock|only\\s+1\\s+available)",
+          "severity": "Medium"
+        },
+        {
+          "id": "hidden_costs",
+          "label": "Hidden Costs & Drip Pricing",
+          "regex": "(extra\\s+charge|processing\\s+fee|convenience\\s+fee|mandatory\\s+handling|packaging\\s+charge)",
+          "severity": "High"
+        },
+        {
+          "id": "confirm_shaming",
+          "label": "Confirm Shaming",
+          "regex": "(no\\s+thanks\\s+i\\s+don'?t\\s+want\\s+savings|i\\s+don'?t\\s+care\\s+about\\s+discounts|no\\s+i\\s+prefer\\s+paying\\s+full\\s+price|i'll\\s+pass\\s+on\\s+saving\\s+money)",
+          "severity": "Medium"
+        },
+        {
+          "id": "forced_action",
+          "label": "Forced Action / Gating",
+          "regex": "(sign\\s*up\\s+to\\s+continue|login\\s+required\\s+to\\s+view|install\\s+app\\s+to\\s+buy|mandatory\\s+newsletter)",
+          "severity": "Low"
+        },
+        {
+          "id": "misleading_discounts",
+          "label": "Misleading Discounts",
+          "regex": "(9[0-9]%\\s+off|mega\\s+sale|flash\\s+deal|was\\s+₹?\\d+.*now\\s+₹?0|unbelievable\\s+drop)",
+          "severity": "Medium"
+        }
+      ]
+    },
+    "risk_meter_widget": {
+      "type": "Semi-circular gauge / progress ring with dynamic stroke color (#22C55E low, #F59E0B medium, #EF4444 high)",
+      "score_formula": "min(100, patterns_detected * 18 + high_severity_count * 15)",
+      "risk_level_rules": {
+        "Low": "1-2 patterns detected (<35% score)",
+        "Medium": "3-5 patterns detected (35%-70% score)",
+        "High": "More than 5 patterns detected (>70% score)"
+      }
+    },
+    "contact_form": {
+      "fields": [
+        {"name": "full_name", "type": "text", "label": "Auditor / Reporter Name", "required": true},
+        {"name": "email", "type": "email", "label": "Email Address", "required": true},
+        {"name": "store_name", "type": "text", "label": "Target Store Name / URL", "required": true},
+        {"name": "dark_pattern_category", "type": "select", "options": ["Fake Urgency", "Hidden Fees", "Confirm Shaming", "Forced Continuity", "Bait & Switch", "Other"], "required": true},
+        {"name": "evidence_notes", "type": "textarea", "label": "Trap Description & Evidence", "required": true}
+      ],
+      "actions": ["Submit Report to MongoDB", "Auto-run preliminary scan on reported store"]
+    }
+  },
+  "backend_api_blueprint": {
+    "endpoints": [
+      {
+        "method": "POST",
+        "path": "/api/scans",
+        "summary": "Run rule-based dark pattern analysis and store audit in MongoDB",
+        "request_body": {
+          "target_url": "string (optional)",
+          "scan_type": "url | screenshot | text",
+          "raw_text": "string (optional)",
+          "notes": "string (optional)"
+        },
+        "response_sample": {
+          "id": "string",
+          "target_url": "https://www.flipkart.com",
+          "scan_type": "url",
+          "severity": "High",
+          "risk_score": 82,
+          "patterns_found": 6,
+          "pattern_details": [],
+          "created_at": "ISO timestamp"
+        }
+      },
+      {
+        "method": "GET",
+        "path": "/api/scans",
+        "summary": "Retrieve historical scans with optional severity filter and sorting"
+      },
+      {
+        "method": "DELETE",
+        "path": "/api/scans/{scan_id}",
+        "summary": "Delete a scan record from MongoDB"
+      },
+      {
+        "method": "POST",
+        "path": "/api/contacts",
+        "summary": "Submit interactive dark pattern violation report or inquiry"
+      },
+      {
+        "method": "GET",
+        "path": "/api/contacts",
+        "summary": "List submitted incident reports for admin review"
+      },
+      {
+        "method": "GET",
+        "path": "/api/stats",
+        "summary": "Aggregated detection metrics (total scans, most common dark pattern, high risk sites)"
+      }
+    ]
+  },
+  "motion_and_interactions": {
+    "engine": "Tailwind CSS v4 tw-animate-css + native CSS transitions",
+    "radar_ping": "animate-ping opacity-75 duration-1000",
+    "card_hover": "transition-all duration-300 hover:scale-[1.01] hover:border-cyan-500/50 hover:shadow-cyan-500/10",
+    "button_press": "active:scale-95 transition-transform duration-100",
+    "status_pulse": "relative flex h-3 w-3 inline-block rounded-full bg-emerald-500 animate-pulse"
+  },
+  "instructions_to_main_agent": [
+    "Strictly follow dark cybersecurity palette: Slate-950 base (#0F172A), Slate-900 cards, Cyan (#06B6D4) and Neon Blue (#3B82F6) interactive accents.",
+    "Do NOT make the header transparent; use glassmorphism with backdrop-blur-xl and solid bg-slate-950/85 to preserve readability across scroll.",
+    "Deliver all 10 project requirements from the PDF prompt: URL Scanner, Screenshot Upload OCR simulator, Regex Pattern Engine (6 categories), Severity Risk Meter, Results Dashboard with charts, PDF Report generator/exporter, Scan History stored in MongoDB, Awareness Quiz with scoring, Indian Presets (Amazon, Flipkart, Myntra, Meesho), and Cross-Platform Responsive layout.",
+    "Implement interactive Contact & Deceptive Incident Reporting form wired to FastAPI + MongoDB (/api/contacts).",
+    "Ensure CRUD operations for Scan records: View history, filter by severity, inspect pattern breakdown, and delete record.",
+    "Add explicit data-testid attributes to all interactive elements for robust test automation."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": {
+    "forbidden_anti_patterns": [
+      "DO NOT use generic light theme or corporate gray slop; use the rich dark cybersecurity aesthetic specified in the MCA brief.",
+      "DO NOT use raw HTML <select> or <input type='date'>; use custom styled UI elements.",
+      "DO NOT center-align the main container (.App { text-align: center; } is strictly banned).",
+      "DO NOT use universal transition 'transition: all' which glitches transforms.",
+      "DO NOT leave header background transparent when elements scroll beneath it."
+    ],
+    "mandatory_standards": [
+      "All buttons, inputs, links, and cards must contain kebab-case data-testid attributes.",
+      "All scans and contact inquiries must persist in MongoDB via FastAPI endpoints.",
+      "Use Sonner for user-facing toasts on scan completion, history deletion, PDF generation, and contact form submissions.",
+      "Ensure full mobile responsiveness down to 360px viewport without horizontal scrolling."
+    ]
+  }
+}
