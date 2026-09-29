@@ -5,6 +5,7 @@ DarkShield is a dark-first consumer shopping companion that helps people identif
 The public experience is a continuous guided investigation: a clickable hero example teaches three pressure signals, a scroll-linked stage rail tracks the journey, scan results expose selectable evidence, cards react to pointer movement, and sections reveal progressively as the shopper moves through the page.
 
 The visual system uses a professional graphite background with restrained mineral-teal highlights and layered 3D surfaces: inset edge lighting, dimensional controls, deep neutral shadows, and pointer-responsive card perspective.
+The fixed header uses a compact hero offset with only a small breathing space. The graphite background has a slow ambient gradient drift, disabled automatically when reduced motion is preferred.
 
 ## Data model
 - `ScanRecord`: id, target_url, scan_type (`url`, `screenshot`, `text`), severity, risk_score, patterns_found, pattern_details, notes, created_at.
