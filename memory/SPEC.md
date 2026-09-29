@@ -5,6 +5,7 @@ DarkShield is a dark-first consumer shopping companion that helps people identif
 The public experience is a continuous guided investigation: a clickable hero example teaches three pressure signals, a scroll-linked stage rail tracks the journey, scan results expose selectable evidence, cards react to pointer movement, and sections reveal progressively as the shopper moves through the page.
 
 The visual system uses a soft pearl-white background with charcoal typography, restrained teal highlights, and layered light 3D surfaces: inset edge lighting, dimensional controls, neutral shadows, and pointer-responsive card perspective.
+The interactive browser preview uses a frosted pearl surface with charcoal content, teal product details, and distinct soft signal colours rather than a heavy dark panel.
 The fixed header uses a compact hero offset with only a small breathing space. The graphite background has a slow ambient gradient drift, disabled automatically when reduced motion is preferred.
 
 ## Data model
