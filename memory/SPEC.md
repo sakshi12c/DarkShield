@@ -2,6 +2,8 @@
 
 DarkShield is a dark-first consumer shopping companion that helps people identify manipulative e-commerce copy. It combines a distinctive landing page, URL/screenshot-text scanner, caution results, MongoDB-backed saved checks, an awareness quiz, and an interactive pre-purchase checklist.
 
+The public experience is a continuous guided investigation: a clickable hero example teaches three pressure signals, a scroll-linked stage rail tracks the journey, scan results expose selectable evidence, cards react to pointer movement, and sections reveal progressively as the shopper moves through the page.
+
 ## Data model
 - `ScanRecord`: id, target_url, scan_type (`url`, `screenshot`, `text`), severity, risk_score, patterns_found, pattern_details, notes, created_at.
 - `ContactReport`: id, full_name, email, store_name, dark_pattern_category, evidence_notes, status, created_at.
