@@ -124,3 +124,23 @@ body::before { content: ""; position: fixed; z-index: -1; inset: 0; background: 
 @media (max-width:1279px) { .case-rail { display: none; } }
 @media (max-width:899px) { .cursor-orb { display: none; }.reveal-block { opacity: 1; transform: none; }.tilt-card.tilting,.browser-card.tilting { transform: none; } }
 @media (prefers-reduced-motion:reduce) { html { scroll-behavior: auto; }.reveal-block,.tilt-card,.pressure-tag,.pattern-item,.record-row,.quiz-option,.checklist-item,.scroll-progress span { transition-duration: .01ms !important; }.scanner-card.scanning .scan-beam,.signal-flash { animation: none; } }
+
+/* Five-question quiz and answer review */
+.quiz-option { min-height: 56px; align-items: center; padding: 11px 14px; }
+.quiz-option > .option-letter { flex: 0 0 30px; display: grid; width: 30px; height: 30px; place-items: center; border: 1px solid #475569; border-radius: 50%; color: #94a3b8; font: 600 11px "JetBrains Mono Variable",monospace; }
+.quiz-option > .option-copy { flex: 1; min-width: 0; color: #cbd5e1; line-height: 1.45; white-space: normal; }
+.quiz-option.selected { border-color: rgba(103,232,249,.55); background: linear-gradient(90deg,rgba(34,211,238,.12),rgba(34,211,238,.03)); transform: translateX(4px); }
+.quiz-option.selected .option-letter { border-color: #67e8f9; color: #082f49; background: #a5f3fc; box-shadow: 0 0 18px rgba(103,232,249,.24); }
+.quiz-result { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 18px; padding: 24px; border: 1px solid rgba(103,232,249,.18); border-radius: 16px; background: linear-gradient(120deg,rgba(8,145,178,.1),rgba(99,102,241,.06)); text-align: left; }
+.score-orbit { display: grid; width: 82px; height: 82px; place-items: center; align-content: center; border: 1px solid rgba(103,232,249,.4); border-radius: 50%; background: rgba(2,8,23,.45); box-shadow: inset 0 0 25px rgba(34,211,238,.08),0 0 30px rgba(34,211,238,.08); }
+.score-orbit b { font: 700 22px "Space Grotesk Variable",sans-serif; }.score-orbit small { margin-top: 2px; color: #67e8f9; font: 7px "JetBrains Mono Variable",monospace; letter-spacing: .13em; }
+.quiz-result strong { font: 600 18px "Space Grotesk Variable",sans-serif; }.quiz-result p { margin-bottom: 0; }
+.answer-review { display: grid; gap: 10px; margin-top: 16px; }
+.review-item { display: grid; grid-template-columns: 78px 1fr; overflow: hidden; border: 1px solid rgba(148,163,184,.14); border-radius: 13px; background: rgba(2,8,23,.3); }
+.review-status { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 7px; padding: 14px 8px; border-right: 1px solid rgba(148,163,184,.12); }
+.review-status span { display: grid; width: 27px; height: 27px; place-items: center; border-radius: 50%; font-weight: 700; }.review-status small { font: 7px "JetBrains Mono Variable",monospace; letter-spacing: .08em; text-align: center; }
+.review-correct .review-status { color: #86efac; background: rgba(52,211,153,.07); }.review-correct .review-status span { border: 1px solid rgba(52,211,153,.4); }
+.review-wrong .review-status { color: #fda4af; background: rgba(251,113,133,.07); }.review-wrong .review-status span { border: 1px solid rgba(251,113,133,.4); }
+.review-copy { padding: 14px 16px; }.review-copy h4 { margin: 0 0 9px; color: #e2e8f0; font-size: 12px; line-height: 1.45; }.review-copy p { margin: 4px 0; color: #94a3b8; font-size: 11px; }.review-copy p b { color: #cbd5e1; }.review-wrong [data-testid="quiz-correct-answer"] { color: #bbf7d0; }.review-copy > small { display: block; margin-top: 9px; padding-top: 9px; border-top: 1px solid rgba(148,163,184,.1); color: #64748b; font-size: 10px; line-height: 1.55; }
+.review-restart { margin-top: 16px; }
+@media (max-width:560px) { .quiz-result { grid-template-columns: 1fr; text-align: center; }.score-orbit { margin: 0 auto; }.review-item { grid-template-columns: 1fr; }.review-status { flex-direction: row; justify-content: flex-start; border-right: 0; border-bottom: 1px solid rgba(148,163,184,.12); }.quiz-footer { align-items: flex-start; flex-direction: column; } }
