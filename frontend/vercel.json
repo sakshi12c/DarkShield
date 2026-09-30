@@ -2,7 +2,7 @@
   "rewrites": [
     {
       "source": "/api/:path*",
-      "destination": "https://darkshield.onrender.com/api/:path*"
+      "destination": "https://dark-shield-dark-pattern-detector.onrender.com/api/:path*"
     }
   ]
 }
