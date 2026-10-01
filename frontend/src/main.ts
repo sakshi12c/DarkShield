@@ -174,11 +174,32 @@ function renderResults(scan: ScanRecord | null) {
   const meterColor = scan.severity === "High" ? "#fb7185" : scan.severity === "Medium" ? "#fbbf24" : "#34d399";
   target.innerHTML = `<div class="results-card evidence-case" data-testid="results-dashboard"><div class="case-stamp">CASE / ${scan.id.slice(0, 6).toUpperCase()}</div><div class="results-head"><div><span class="result-kicker" data-testid="results-live-badge">MOST RECENT CHECK</span><span class="result-meta" data-testid="results-scan-type">${escapeHtml(scan.scan_type)} / ${formatDate(scan.created_at)}</span><h3 data-testid="results-heading">${scan.patterns_found ? "This page is applying pressure." : "Nothing obvious jumped out."}</h3><p data-testid="results-target">${escapeHtml(scan.target_url || "Screenshot text")}</p></div><button data-testid="results-export-pdf-btn" id="print-report" class="button button-outline magnetic">Save a copy</button></div><div class="results-grid"><div class="meter-wrap" data-testid="results-risk-meter"><div class="meter" style="--meter:${scan.risk_score}%;--meter-color:${meterColor}"><div><b data-testid="results-risk-score">${scan.risk_score}</b><small>CAUTION SCORE</small></div></div><span class="risk-badge ${severityClass(scan.severity)}" data-testid="results-severity-badge">${scan.severity} caution</span><small data-testid="results-patterns-count">${scan.patterns_found} signal${scan.patterns_found === 1 ? "" : "s"} noticed</small></div><div class="pattern-column"><div class="pattern-heading"><span><b data-testid="results-patterns-label">OPEN THE EVIDENCE</b><small data-testid="results-patterns-helper">Select a signal to pull it forward.</small></span><span class="live-label" data-testid="results-engine-status"><i></i> CHECK COMPLETE</span></div>${scan.pattern_details.length ? scan.pattern_details.map((pattern, index) => `<article class="pattern-item ${index === 0 ? "focused" : ""}" tabindex="0" role="button" data-testid="results-pattern-item"><div><strong data-testid="results-pattern-category"><span class="pattern-index">0${index + 1}</span>${escapeHtml(pattern.category)}</strong><span class="risk-badge ${severityClass(pattern.severity)}">${pattern.severity}</span></div><p data-testid="results-pattern-evidence">“${escapeHtml(pattern.evidence)}”</p><small data-testid="results-pattern-recommendation">${escapeHtml(pattern.recommendation)}</small></article>`).join("") : `<div class="no-patterns" data-testid="results-no-patterns">No familiar pressure phrases appeared in this check. Still compare the final price, returns and selected extras before paying.</div>`}</div></div></div>`;
   document.querySelector<HTMLButtonElement>("#print-report")?.addEventListener("click", () => {
-  const card = document.querySelector<HTMLElement>("#results-content .results-card");
-  if (!card) return;
-  toast("Preparing your PDF…");
-  (window as any).html2pdf(card, { filename: `darkshield-report-${Date.now()}.pdf`, margin: 10, jsPDF: { format: "a4" } });
-});
+    const { jsPDF } = (window as any).jspdf;
+    const doc = new jsPDF();
+    let y = 20;
+    doc.setFontSize(18); doc.text("DarkShield Report", 14, y); y += 10;
+    doc.setFontSize(11);
+    doc.text(`Target: ${scan.target_url || "Screenshot check"}`, 14, y); y += 7;
+    doc.text(`Type: ${scan.scan_type}   Date: ${formatDate(scan.created_at)}`, 14, y); y += 7;
+    doc.text(`Severity: ${scan.severity} caution   Risk score: ${scan.risk_score}`, 14, y); y += 10;
+    doc.text(`Patterns found: ${scan.patterns_found}`, 14, y); y += 10;
+    if (scan.pattern_details.length) {
+      scan.pattern_details.forEach((p, i) => {
+        doc.setFont(undefined, "bold");
+        doc.text(`${i + 1}. ${p.category} (${p.severity})`, 14, y); y += 6;
+        doc.setFont(undefined, "normal");
+        const evidence = doc.splitTextToSize(`Evidence: "${p.evidence}"`, 180);
+        doc.text(evidence, 18, y); y += evidence.length * 6;
+        const rec = doc.splitTextToSize(`Tip: ${p.recommendation}`, 180);
+        doc.text(rec, 18, y); y += rec.length * 6 + 4;
+        if (y > 270) { doc.addPage(); y = 20; }
+      });
+    } else {
+      doc.text("No familiar pressure phrases appeared in this check.", 14, y);
+    }
+    doc.save(`darkshield-report-${Date.now()}.pdf`);
+    toast("PDF downloaded");
+  });
   wirePatternFocus();
 }
 
