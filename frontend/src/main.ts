@@ -282,7 +282,8 @@ function renderResults(scan: ScanRecord | null) {
     doc.save(`darkshield-report-${Date.now()}.pdf`);
     toast("PDF downloaded");
   });
-  
+  wirePatternFocus();
+}  
 
 function renderRecords() {
   const list = document.querySelector<HTMLDivElement>("#records-list");
