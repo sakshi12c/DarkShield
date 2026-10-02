@@ -153,7 +153,7 @@ function shell() {
       <button class="case-node" data-target="checklist" data-testid="stage-checklist-button"><b>05</b><small>Decide</small></button>
     </aside>
     <header class="site-header" data-testid="site-header"><div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div><div class="shell header-inner">
-      <a class="brand" data-testid="nav-brand-logo" href="#top"><img src="/logo.svg" alt="DarkShield logo" class="brand-mark" /><span><strong>DarkShield</strong><small>SHOP WITH CLEAR EYES</small></span></a>
+      <a class="brand" data-testid="nav-brand-logo" href="#top"><img src="/logo.png" alt="DarkShield logo" class="brand-mark" /><span><strong>DarkShield</strong><small>SHOP WITH CLEAR EYES</small></span></a>
       <nav class="desktop-nav" data-testid="desktop-navigation"><a data-testid="nav-scanner-link" href="#scanner">Scan a store</a><a data-testid="nav-records-link" href="#records">Saved checks</a><a data-testid="nav-quiz-link" href="#quiz">Spot the trick</a><a data-testid="nav-checklist-link" href="#checklist">Before you buy</a></nav>
       <span class="system-pill" data-testid="nav-status-pill"><i></i> ready when you are</span><a data-testid="nav-scan-cta" class="button button-primary header-cta" href="#scanner">Check a page →</a>
     </div></header>
