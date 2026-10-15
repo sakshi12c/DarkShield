@@ -153,7 +153,7 @@ function shell() {
       <button class="case-node" data-target="checklist" data-testid="stage-checklist-button"><b>05</b><small>Decide</small></button>
     </aside>
     <header class="site-header" data-testid="site-header"><div class="scroll-progress" aria-hidden="true"><span id="scroll-progress"></span></div><div class="shell header-inner">
-      <a class="brand" data-testid="nav-brand-logo" href="#top"><span class="brand-mark">DS</span><span><strong>DarkShield</strong><small>SHOP WITH CLEAR EYES</small></span></a>
+      <a class="brand" data-testid="nav-brand-logo" href="#top"><img src="/logo.svg" alt="DarkShield logo" class="brand-mark" /><span><strong>DarkShield</strong><small>SHOP WITH CLEAR EYES</small></span></a>
       <nav class="desktop-nav" data-testid="desktop-navigation"><a data-testid="nav-scanner-link" href="#scanner">Scan a store</a><a data-testid="nav-records-link" href="#records">Saved checks</a><a data-testid="nav-quiz-link" href="#quiz">Spot the trick</a><a data-testid="nav-checklist-link" href="#checklist">Before you buy</a></nav>
       <span class="system-pill" data-testid="nav-status-pill"><i></i> ready when you are</span><a data-testid="nav-scan-cta" class="button button-primary header-cta" href="#scanner">Check a page →</a>
     </div></header>
@@ -173,7 +173,115 @@ function renderResults(scan: ScanRecord | null) {
   if (!scan) { target.innerHTML = `<div class="empty-card" data-testid="results-empty-state"><span class="empty-number">01</span><strong data-testid="results-empty-title">Your first check starts above.</strong><p data-testid="results-empty-copy">Add a shopping page and DarkShield will separate ordinary selling from copy that deserves a second look.</p></div>`; return; }
   const meterColor = scan.severity === "High" ? "#fb7185" : scan.severity === "Medium" ? "#fbbf24" : "#34d399";
   target.innerHTML = `<div class="results-card evidence-case" data-testid="results-dashboard"><div class="case-stamp">CASE / ${scan.id.slice(0, 6).toUpperCase()}</div><div class="results-head"><div><span class="result-kicker" data-testid="results-live-badge">MOST RECENT CHECK</span><span class="result-meta" data-testid="results-scan-type">${escapeHtml(scan.scan_type)} / ${formatDate(scan.created_at)}</span><h3 data-testid="results-heading">${scan.patterns_found ? "This page is applying pressure." : "Nothing obvious jumped out."}</h3><p data-testid="results-target">${escapeHtml(scan.target_url || "Screenshot text")}</p></div><button data-testid="results-export-pdf-btn" id="print-report" class="button button-outline magnetic">Save a copy</button></div><div class="results-grid"><div class="meter-wrap" data-testid="results-risk-meter"><div class="meter" style="--meter:${scan.risk_score}%;--meter-color:${meterColor}"><div><b data-testid="results-risk-score">${scan.risk_score}</b><small>CAUTION SCORE</small></div></div><span class="risk-badge ${severityClass(scan.severity)}" data-testid="results-severity-badge">${scan.severity} caution</span><small data-testid="results-patterns-count">${scan.patterns_found} signal${scan.patterns_found === 1 ? "" : "s"} noticed</small></div><div class="pattern-column"><div class="pattern-heading"><span><b data-testid="results-patterns-label">OPEN THE EVIDENCE</b><small data-testid="results-patterns-helper">Select a signal to pull it forward.</small></span><span class="live-label" data-testid="results-engine-status"><i></i> CHECK COMPLETE</span></div>${scan.pattern_details.length ? scan.pattern_details.map((pattern, index) => `<article class="pattern-item ${index === 0 ? "focused" : ""}" tabindex="0" role="button" data-testid="results-pattern-item"><div><strong data-testid="results-pattern-category"><span class="pattern-index">0${index + 1}</span>${escapeHtml(pattern.category)}</strong><span class="risk-badge ${severityClass(pattern.severity)}">${pattern.severity}</span></div><p data-testid="results-pattern-evidence">“${escapeHtml(pattern.evidence)}”</p><small data-testid="results-pattern-recommendation">${escapeHtml(pattern.recommendation)}</small></article>`).join("") : `<div class="no-patterns" data-testid="results-no-patterns">No familiar pressure phrases appeared in this check. Still compare the final price, returns and selected extras before paying.</div>`}</div></div></div>`;
-  document.querySelector<HTMLButtonElement>("#print-report")?.addEventListener("click", () => { window.print(); toast("Print-ready audit report opened"); });
+     document.querySelector<HTMLButtonElement>("#print-report")?.addEventListener("click", () => {
+    const { jsPDF } = (window as any).jspdf;
+    const doc = new jsPDF();
+    const pageW = doc.internal.pageSize.getWidth();
+    const margin = 14;
+    const contentW = pageW - margin * 2;
+
+    const sevColor = (sev: string) =>
+      sev === "High" ? [219, 68, 83] : sev === "Medium" ? [217, 142, 16] : [38, 140, 106];
+    const sevTint = (sev: string) =>
+      sev === "High" ? [253, 237, 238] : sev === "Medium" ? [253, 244, 227] : [232, 247, 240];
+
+    // Header band
+    doc.setFillColor(23, 32, 36);
+    doc.rect(0, 0, pageW, 30, "F");
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(18);
+    doc.setFont(undefined, "bold");
+    doc.text("DarkShield Report", margin, 19);
+    doc.setFontSize(9);
+    doc.setFont(undefined, "normal");
+    doc.text(`Generated ${formatDate(new Date().toISOString())}`, pageW - margin, 19, { align: "right" });
+
+    let y = 42;
+    doc.setTextColor(23, 32, 36);
+    doc.setFontSize(10);
+    doc.setFont(undefined, "bold");
+    doc.text("Target:", margin, y);
+    doc.setFont(undefined, "normal");
+    doc.text(scan.target_url || "Screenshot check", margin + 20, y);
+    y += 7;
+    doc.setFont(undefined, "bold");
+    doc.text("Type / Date:", margin, y);
+    doc.setFont(undefined, "normal");
+    doc.text(`${scan.scan_type} · ${formatDate(scan.created_at)}`, margin + 28, y);
+    y += 12;
+
+    // Severity + score summary card
+    const [sr, sg, sb] = sevColor(scan.severity);
+    const [tr, tg, tb] = sevTint(scan.severity);
+    doc.setFillColor(tr, tg, tb);
+    doc.roundedRect(margin, y, contentW, 26, 3, 3, "F");
+    doc.setDrawColor(sr, sg, sb);
+    doc.roundedRect(margin, y, contentW, 26, 3, 3, "S");
+    doc.setTextColor(sr, sg, sb);
+    doc.setFontSize(13);
+    doc.setFont(undefined, "bold");
+    doc.text(`${scan.severity.toUpperCase()} CAUTION`, margin + 8, y + 11);
+    doc.setFontSize(9);
+    doc.setFont(undefined, "normal");
+    doc.text(`Risk score ${scan.risk_score}/100   ·   ${scan.patterns_found} pattern${scan.patterns_found === 1 ? "" : "s"} found`, margin + 8, y + 19);
+
+    // Score bar
+    const barX = pageW - margin - 60;
+    doc.setFillColor(225, 228, 224);
+    doc.roundedRect(barX, y + 15, 52, 4, 2, 2, "F");
+    doc.setFillColor(sr, sg, sb);
+    doc.roundedRect(barX, y + 15, Math.max(4, (52 * scan.risk_score) / 100), 4, 2, 2, "F");
+
+    y += 38;
+    doc.setTextColor(23, 32, 36);
+    doc.setFontSize(12);
+    doc.setFont(undefined, "bold");
+    doc.text("Detected Patterns", margin, y);
+    y += 8;
+
+    if (scan.pattern_details.length) {
+      scan.pattern_details.forEach((p, i) => {
+        const [pr, pg, pb] = sevColor(p.severity);
+        const [ptr, ptg, ptb] = sevTint(p.severity);
+        doc.setFontSize(9);
+        const evidence = doc.splitTextToSize(`Evidence: "${p.evidence}"`, contentW - 14);
+        const rec = doc.splitTextToSize(`Tip: ${p.recommendation}`, contentW - 14);
+        const cardH = 16 + evidence.length * 5 + rec.length * 5;
+
+        if (y + cardH > 275) { doc.addPage(); y = 20; }
+
+        doc.setFillColor(ptr, ptg, ptb);
+        doc.roundedRect(margin, y, contentW, cardH, 2, 2, "F");
+        doc.setFillColor(pr, pg, pb);
+        doc.rect(margin, y, 3, cardH, "F");
+
+        doc.setTextColor(23, 32, 36);
+        doc.setFontSize(10);
+        doc.setFont(undefined, "bold");
+        doc.text(`${i + 1}. ${p.category}`, margin + 8, y + 8);
+        doc.setTextColor(pr, pg, pb);
+        doc.setFontSize(8);
+        doc.text(p.severity.toUpperCase(), pageW - margin - 6, y + 8, { align: "right" });
+
+        doc.setTextColor(80, 90, 95);
+        doc.setFont(undefined, "normal");
+        doc.setFontSize(9);
+        doc.text(evidence, margin + 8, y + 15);
+        doc.text(rec, margin + 8, y + 15 + evidence.length * 5);
+
+        y += cardH + 6;
+      });
+    } else {
+      doc.setFillColor(232, 247, 240);
+      doc.roundedRect(margin, y, contentW, 16, 2, 2, "F");
+      doc.setTextColor(38, 140, 106);
+      doc.setFontSize(9);
+      doc.text("No familiar pressure phrases appeared in this check.", margin + 8, y + 10);
+    }
+
+    doc.save(`darkshield-report-${Date.now()}.pdf`);
+    toast("PDF downloaded");
+  });
   wirePatternFocus();
 }
 
